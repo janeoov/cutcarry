@@ -8,6 +8,18 @@ window.addEventListener('scroll', updateProgress, { passive: true });
 window.addEventListener('resize', updateProgress);
 updateProgress();
 
+if ('IntersectionObserver' in window) {
+  const reveal = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    }
+  });
+  const targets = '.hero h1, .hero .intro, .card, .section > h2, .section > .note, footer > .wrap';
+  document.querySelectorAll(targets).forEach(element => reveal.observe(element));
+}
+
 const statusMessage = document.getElementById('status');
 let messageTimeout;
 document.querySelectorAll('[data-copy]').forEach(button => {
