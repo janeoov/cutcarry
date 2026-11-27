@@ -1,22 +1,3 @@
-document.documentElement.classList.add('js');
-
-const menu = document.querySelector('.menu');
-const nav = document.querySelector('nav');
-menu.addEventListener('click', () => {
-  menu.setAttribute('aria-expanded', String(menu.getAttribute('aria-expanded') !== 'true'));
-});
-
-nav.addEventListener('click', event => {
-  if (event.target.closest('a')) menu.setAttribute('aria-expanded', 'false');
-});
-
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
-    menu.setAttribute('aria-expanded', 'false');
-    menu.focus();
-  }
-});
-
 const progress = document.querySelector('.progress');
 function updateProgress() {
   const length = document.documentElement.scrollHeight - window.innerHeight;
