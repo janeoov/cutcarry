@@ -47,8 +47,8 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     }
     clearTimeout(messageTimeout);
     statusMessage.textContent = copied
-      ? (source.id === 'kakao' ? '카카오톡 ID를 복사했어요.' : '양식을 복사했어요. 오픈톡에 붙여넣어 주세요.')
-      : '텍스트를 선택했어요. 기기의 복사 기능을 이용해 주세요.';
+      ? (source.id === 'kakao' ? '카카오톡 ID 복사 완료' : '양식 복사 완료')
+      : '자동 복사 실패. 선택된 텍스트는 기기의 복사 기능으로 복사할 수 있습니다.';
     messageTimeout = setTimeout(() => { statusMessage.textContent = ''; }, 3200);
   });
 });
