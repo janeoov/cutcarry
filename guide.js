@@ -33,3 +33,22 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     messageTimeout = setTimeout(() => { statusMessage.textContent = ''; }, 3200);
   });
 });
+
+async function showViewCount() {
+  const output = document.getElementById('views');
+  const action = location.hostname === 'cutcarry.vercel.app' ? 'hit' : 'get';
+  try {
+    const response = await fetch(
+      'https://abacus.jasoncameron.dev/' + action + '/cutcarry-vercel-app/visits',
+      { cache: 'no-store', credentials: 'omit', referrerPolicy: 'no-referrer' }
+    );
+    if (!response.ok) throw new Error('Counter unavailable');
+    const { value } = await response.json();
+    if (!Number.isSafeInteger(value) || value < 0) throw new Error('Invalid count');
+    output.textContent = value.toLocaleString('ko-KR');
+  } catch {
+    output.title = '조회수를 불러올 수 없습니다.';
+  }
+}
+
+showViewCount();
